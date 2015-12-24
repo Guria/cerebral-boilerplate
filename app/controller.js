@@ -3,6 +3,7 @@ import Model from 'cerebral-baobab';
 
 const model = Model({
   title: 'You can change the url too!',
+  data: {},
   color: '#333'
 });
 

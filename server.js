@@ -5,10 +5,24 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
+import httpProxy from 'http-proxy';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 3000 : process.env.PORT;
+const port = isDeveloping ? 8080 : process.env.PORT;
 const app = express();
+
+const hoodieProxy = httpProxy.createProxyServer({
+  changeOrigin: true,
+  target: 'http://127.0.0.1:3000/',
+});
+
+app.all('/api/*', function (req, res) {
+  hoodieProxy.web(req, res);
+});
+
+hoodieProxy.on('error', function (e) {
+  console.error('Hoodie Error:', e);
+});
 
 if (isDeveloping) {
   const compiler = webpack(config);

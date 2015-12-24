@@ -6,8 +6,10 @@ import {Container} from 'cerebral-react';
 
 import Home from './modules/Home';
 import homeSignals from './modules/Home/signals';
+import hoodieSignals from './modules/Hoodie/signals';
 
 homeSignals(controller);
+hoodieSignals(controller);
 
 Router(controller, {
   '/': 'colorChanged'
