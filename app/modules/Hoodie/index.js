@@ -1,4 +1,4 @@
-import Hoodie, { CustomStore as Store } from './cerebral-hoodie';
+import Hoodie, { Store } from 'cerebral-hoodie';
 import humbleLocalStorage from 'humble-localstorage';
 import randomString from 'random-string';
 
@@ -21,6 +21,6 @@ var CustomStore = Store.defaults({
 export default (controller) => {
 
   let store = window.store = new CustomStore(storeId);
-  Hoodie(controller, { store, connect: true });
+  Hoodie(controller, store, { connect: true });
 
 };
